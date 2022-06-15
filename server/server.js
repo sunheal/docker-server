@@ -5,11 +5,20 @@ const port = 4444;
 const { Client } = require('pg');
 const client = new Client({
   user: 'postgres',
-  host: 'the-name-for-my-postgres-container-within-the-docker-compose-yml-file',
+  password: 'psql_docker',
+  // host: 'the-name-for-my-postgres-container-within-the-docker-compose-yml-file',
+  host: 'postgres_container',
   database: 'postgres',
   port: 5432,
 })
-client.connect();
+
+client.connect(err => {
+  if (err) {
+    console.error('connection error', err.stack);
+  } else {
+    console.log('connected');
+  }
+});
 
 
 app.get('/', (req, res) => {
