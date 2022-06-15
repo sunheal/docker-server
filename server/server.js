@@ -27,8 +27,8 @@ app.get('/', (req, res) => {
       res.status(400);
       res.send('Database is not connected successfully!');
     }
-    res.send(dbResponse);
-    client.end();
+    res.status(200).send(dbResponse.rows);
+    // client.end();
   });
 })
 
